@@ -7,7 +7,7 @@ from zenml.logger import get_logger
 
 logger = get_logger(__name__)
 
-@pipeline
+@pipeline(enable_cache=False)
 def tips_pipeline():
     data = data_loading()
     data, label_encoders = data_encoding(data)

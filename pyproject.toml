@@ -3,8 +3,12 @@ name = "restaurant-project"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "pandas>=2.3.1",
+    "plotly>=6.2.0",
+    "pyarrow>=20.0.0",
     "scikit-learn>=1.7.0",
+    "streamlit>=1.46.1",
+    "zenml[server]>=0.83.1",
 ]

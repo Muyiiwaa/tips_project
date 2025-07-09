@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 import logging
 from typing import Optional,Tuple,Dict
+import joblib
 
 # configure logging
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -21,6 +22,7 @@ def encode_dataset(data: pd.DataFrame) -> Tuple[Optional[pd.DataFrame],Optional[
             data[col] = encoder.transform(data[col])
             label_encoders[col] = encoder
         logger.info(f"Completed encoding of columns: {categorical_columns}")
+        joblib.dump(label_encoders, "label_encoder.pkl")
     except Exception as err:
         logger.error(f"An error occured: {err}")
     
@@ -60,6 +62,7 @@ def scale_dataset(X_train:pd.DataFrame,X_test:pd.DataFrame,
 
         X_train = pd.DataFrame(data=X_train_scaled, columns=columns)
         X_test = pd.DataFrame(data=X_test_scaled, columns= columns)
+        joblib.dump(scaler, "scaler.pkl")
     except Exception as err:
         X_train,X_test,y_train,y_test = None, None, None, None
         logger.error(f'An error occured: {err}')

@@ -13,8 +13,8 @@ logger = get_logger(__name__)
 def data_splitting(data: pd.DataFrame) -> Tuple[
     Annotated[pd.DataFrame, "X_train"],
     Annotated[pd.DataFrame, "X_test"],
-    Annotated[pd.DataFrame, "y_train"],
-    Annotated[pd.DataFrame, "y_test"]]:
+    Annotated[pd.Series, "y_train"],
+    Annotated[pd.Series, "y_test"]]:
     X_train, X_test, y_train, y_test = split_dataset(data)
     
     return X_train, X_test, y_train, y_test
@@ -29,11 +29,11 @@ def data_encoding(data: pd.DataFrame) -> Tuple[Annotated[Optional[pd.DataFrame],
 
 @step
 def scaling_dataset(X_train:pd.DataFrame,X_test:pd.DataFrame,
-                  y_train:pd.DataFrame,y_test:pd.DataFrame) -> Tuple[
+                  y_train:pd.Series,y_test:pd.Series) -> Tuple[
                       Annotated[Optional[pd.DataFrame], "X_train"],
                       Annotated[Optional[pd.DataFrame], "X_test"],
-                      Annotated[Optional[pd.DataFrame], "y_train"],
-                      Annotated[Optional[pd.DataFrame], "y_test"]]:
+                      Annotated[Optional[pd.Series], "y_train"],
+                      Annotated[Optional[pd.Series], "y_test"]]:
     X_train,X_test,y_train, y_test = scale_dataset(X_train, X_test, y_train, y_test)
     
     return X_train,X_test,y_train, y_test
